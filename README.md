@@ -2,6 +2,8 @@
 
 Interactive tools for every unit of AP Calculus AB, built for live tutoring sessions.
 
+**Live site: https://derive-xi.vercel.app**. Every push to `main` deploys automatically through Vercel.
+
 ## Run it
 
 ```bash
