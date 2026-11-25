@@ -118,8 +118,13 @@ export function Home() {
           <div className="unit-row" key={u.n}>
             <div className="n">{u.n}</div>
             <div>
-              <h3>{u.title}</h3>
+              <h3>
+                <Link to={`/unit/${u.n}`}>{u.title}</Link>
+              </h3>
               <p className="story">{u.story}</p>
+              <Link className="unit-overview-link" to={`/unit/${u.n}`}>
+                Prerequisites and key ideas →
+              </Link>
             </div>
             <div className="unit-tools">
               {u.tools.map((t) => (

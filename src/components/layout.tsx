@@ -106,6 +106,11 @@ export function Sidebar() {
             </button>
             {isOpen && (
               <ul>
+                <li>
+                  <NavLink to={`/unit/${u.n}`} end className="nav-overview">
+                    Overview and prerequisites
+                  </NavLink>
+                </li>
                 {u.tools.map((t) => (
                   <li key={t.slug}>
                     <NavLink to={`/unit/${u.n}/${t.slug}`}>{t.title}</NavLink>
@@ -214,6 +219,9 @@ function TalkingPoints({ tool }: { tool: FlatTool }) {
     <details className="talk" open>
       <summary>Big idea and talking points</summary>
       <p className="bigidea">{talk.big}</p>
+      <p className="must">
+        <b>Must understand:</b> {talk.mustKnow}
+      </p>
       {talk.formula && (
         <div className="formula">
           <Tex>{talk.formula}</Tex>

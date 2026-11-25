@@ -22,7 +22,8 @@ For a production build, run `npm run build`, then `npm run preview` to serve it 
 | `←` `→` | Previous / next tool, in curriculum order |
 | `H` | Course map |
 
-- Every tool has a **Big idea and talking points** panel with the key formula and a common misconception.
+- Every tool has a **Big idea and talking points** panel with the key formula, a **Must understand** line, and a common misconception.
+- Every unit has an **overview page** (`#/unit/N`, linked from the course map and sidebar) listing its prerequisites and every AB CED topic with the one idea a student must understand to solve problems on it. Topics link to the tools that cover them.
 - Function inputs accept student-style math: `x^3 - 3x`, `sin(x)/x`, `ln(x)`, `sqrt(x+4)`, `abs(x)`, `e^x`, and piecewise `x < 1 ? x^2 : 3 - x`.
 - The function you choose is saved in the URL, so you can bookmark a setup before a session.
 
@@ -42,7 +43,8 @@ For a production build, run `npm run build`, then `npm run preview` to serve it 
 ## Adding a tool
 
 1. Create `src/units/uN/MyTool.tsx` that returns `<ToolLayout stage={…} controls={…} />`.
-2. Register it in `src/curriculum.ts` with its title, CED topics and talking points.
+2. Register it in `src/curriculum.ts` with its title, CED topics and talking points (including `mustKnow`).
+3. Add its slug to the matching topics' `tools` list in `src/syllabus.ts`. `npm test` fails if any tool isn't linked from a topic.
 
 The sidebar, course map, routing and prev/next navigation all update automatically.
 

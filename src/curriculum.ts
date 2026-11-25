@@ -3,6 +3,8 @@ import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
 export interface Talk {
   /** The one-sentence big idea. */
   big: string
+  /** The one idea a student must have to solve problems on this topic. */
+  mustKnow: string
   points: string[]
   /** KaTeX formula */
   formula?: string
@@ -43,6 +45,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u1/LimitExplorer')),
         talk: {
           big: 'A limit is about where f(x) is heading as x gets close to a. It doesn’t depend on f(a) itself.',
+          mustKnow: 'Look at the y-values on both sides of a. If direct substitution gives 0/0, simplify (factor, rationalize, use a common denominator) and try again. If the one-sided limits disagree, the limit does not exist.',
           points: [
             'Drag a toward the hole: the table fills in values from the left and right.',
             'The limit exists only when the left-hand and right-hand values agree.',
@@ -61,6 +64,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u1/Discontinuities')),
         talk: {
           big: 'Continuity at a takes three things: f(a) exists, the limit exists, and the two are equal.',
+          mustKnow: 'Classify a discontinuity by what the limit does there: it exists (removable), the one-sided limits differ (jump), or it is unbounded (infinite). To make a piecewise function continuous, set the one-sided limits equal at the boundary and solve.',
           points: [
             'Removable: the limit exists but f(a) is missing or misplaced. You can fix it by redefining one point.',
             'Jump: the one-sided limits exist but are different. No single point can fix it.',
@@ -79,6 +83,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u1/Squeeze')),
         talk: {
           big: 'If f is trapped between g and h, and g and h head to the same limit, f has nowhere else to go.',
+          mustKnow: 'Find bounds g ≤ f ≤ h that hold near a, and show that g and h have the same limit there. The usual setup is a bounded factor (sin or cos, between −1 and 1) multiplied by something that goes to 0.',
           points: [
             'x²·sin(1/x) oscillates infinitely often near 0, yet it’s pinned between −x² and x².',
             'Zoom in: the squeeze gets tighter and tighter around the limit point.',
@@ -95,6 +100,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u1/Infinity')),
         talk: {
           big: 'Limits at infinity describe what a function does far away: its end behavior.',
+          mustKnow: 'Compare the growth of the top and bottom. A bigger bottom gives 0, equal degrees give the ratio of the leading coefficients, and a bigger top gives no horizontal asymptote. Check x → +∞ and x → −∞ separately (radicals and exponentials can differ).',
           points: [
             'For rational functions, compare the degrees of the top and bottom.',
             'Same degree: the asymptote is the ratio of the leading coefficients.',
@@ -112,6 +118,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u1/IVT')),
         talk: {
           big: 'A continuous function on [a, b] takes every value between f(a) and f(b).',
+          mustKnow: 'IVT needs two things: f is continuous on the closed interval [a, b], and k is between f(a) and f(b). The conclusion is that some c in (a, b) has f(c) = k. A justification must state both conditions.',
           points: [
             'Drag k between f(a) and f(b). There is always at least one c with f(c) = k.',
             'Switch on the discontinuous example and the guarantee breaks.',
@@ -137,6 +144,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u2/SecantTangent')),
         talk: {
           big: 'The derivative is the limit of average rates of change: the slope of the secant line as h → 0.',
+          mustKnow: 'Average rate of change is [f(b) − f(a)]/(b − a), the slope of a secant. The derivative is the limit of that slope. Recognize a limit of the form [f(a+h) − f(a)]/h as f′(a) in disguise.',
           points: [
             'Press play: h shrinks and the secant swings into the tangent.',
             'The difference quotient settles on one number. That number is f′(a).',
@@ -154,6 +162,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u2/DerivativeGrapher')),
         talk: {
           big: 'f′ is a new function: its output at x is the slope of f at x.',
+          mustKnow: 'Read f′ from the slope of f, never its height. Increasing f means positive f′, a flat tangent means f′ = 0, and steeper means larger |f′|.',
           points: [
             'Move the point slowly. Each tangent slope is plotted as a height on the lower graph.',
             'Where f has a flat tangent, f′ crosses zero.',
@@ -171,6 +180,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u2/Differentiability')),
         talk: {
           big: 'Differentiable means locally linear: zoom in far enough and the graph becomes a straight line.',
+          mustKnow: 'Differentiable at a requires continuity AND matching one-sided slopes. For a piecewise function, show the pieces meet at the boundary and that their derivatives agree there.',
           points: [
             'At a corner, the left and right slopes stay different no matter how far you zoom.',
             'At a cusp, the slopes go to +∞ and −∞.',
@@ -189,6 +199,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u2/ProductRule')),
         talk: {
           big: 'When both sides of a rectangle grow, the area gains two strips plus a tiny corner that vanishes.',
+          mustKnow: 'Let the structure choose the rule: a product needs f′g + fg′, and a quotient needs (f′g − fg′)/g². Apply the rule completely before simplifying.',
           points: [
             'Strip 1 is f·Δg and strip 2 is g·Δf.',
             'The corner Δf·Δg shrinks much faster than the strips, so it disappears in the limit.',
@@ -213,6 +224,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u3/ChainRule')),
         talk: {
           big: 'A composition stretches twice: first by g′(x), then by f′(g(x)). The total stretch is the product.',
+          mustKnow: 'Identify the outer and inner functions first. Differentiate the outer function, evaluate it AT the inside, then multiply by the derivative of the inside. Repeat for every layer.',
           points: [
             'Nudge x a little. u = g(x) moves g′(x) times as much.',
             'y = f(u) then moves f′(u) times that.',
@@ -230,6 +242,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u3/Implicit')),
         talk: {
           big: 'A curve doesn’t have to be a function to have tangent lines. Implicit differentiation finds their slope.',
+          mustKnow: 'Differentiate every term with respect to x. Each y-term picks up a dy/dx (chain rule), and products like xy need the product rule. Then solve for dy/dx and evaluate at a point that is actually on the curve.',
           points: [
             'dy/dx depends on both x AND y, because one x can have two points.',
             'Horizontal tangents: set the numerator of dy/dx to 0. Vertical tangents: set the denominator to 0.',
@@ -246,6 +259,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u3/Inverse')),
         talk: {
           big: 'Reflecting over y = x swaps rise and run, so the slopes become reciprocals.',
+          mustKnow: 'To find (f⁻¹)′(b), first find the a with f(a) = b, then compute 1/f′(a). The derivatives of ln x and the inverse trig functions come from this same reciprocal relationship.',
           points: [
             'The point (a, b) on f matches the point (b, a) on f⁻¹.',
             "The slope of f at a is m, so the slope of f⁻¹ at b is 1/m.",
@@ -270,6 +284,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u4/ParticleMotion')),
         talk: {
           big: 'Velocity is the derivative of position, and acceleration is the derivative of velocity. Their signs tell the whole story.',
+          mustKnow: 'Read motion from signs. The sign of v gives direction, a sign change in v is a turnaround, and v and a with the same sign means speeding up. Speed is |v|, not v.',
           points: [
             'v > 0: moving right. v < 0: moving left. v = 0 and changes sign: turns around.',
             'Speeding up when v and a have the SAME sign. Slowing down when the signs differ.',
@@ -287,6 +302,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u4/RelatedRates')),
         talk: {
           big: 'When quantities are linked by an equation, their rates of change are linked by its derivative.',
+          mustKnow: 'Write an equation relating the quantities that is true at all times. Differentiate both sides with respect to t, so every changing variable gets its own d/dt. Substitute the snapshot values only after differentiating.',
           points: [
             '1) Draw and label. 2) Write the equation. 3) Differentiate with respect to t. 4) Substitute.',
             'Substitute numbers only AFTER differentiating. Constants first make the rates disappear.',
@@ -304,6 +320,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u4/Linearization')),
         talk: {
           big: 'Near x = a, the tangent line is a cheap, accurate stand-in for the curve.',
+          mustKnow: 'Build L(x) = f(a) + f′(a)(x − a) from one known point and its slope. Use the sign of f″ near a (concavity) to say whether the estimate is over or under.',
           points: [
             'The error grows the farther you move from a.',
             'Concave up: the tangent lies below the curve, so the estimate is an UNDERestimate.',
@@ -320,6 +337,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u4/LHopital')),
         talk: {
           big: 'When f and g both vanish at a, near a they look like lines through zero, and the ratio of two lines is the ratio of their slopes.',
+          mustKnow: 'Substitute first to confirm the form is 0/0 or ∞/∞, and say so. Then take the limit of f′/g′, and repeat if it is still indeterminate. For any other form the rule does not apply.',
           points: [
             'Zoom in: f ≈ f′(a)(x−a) and g ≈ g′(a)(x−a).',
             'The (x−a) cancels, leaving f′(a)/g′(a).',
@@ -345,6 +363,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u5/ThreeGraphs')),
         talk: {
           big: 'The sign of f′ tells you the direction of f. The sign of f″ tells you how f bends. The zeros of each mark where the behavior changes.',
+          mustKnow: 'Every claim about the shape of f is a claim about the SIGN of f′ or f″ on an interval. An extremum needs f′ to change sign. An inflection point needs f″ to change sign (equivalently, f′ changes from increasing to decreasing).',
           points: [
             'f′ > 0 ⇔ f increasing. f′ < 0 ⇔ f decreasing. f′ changes sign ⇒ relative extremum.',
             'f″ > 0 ⇔ f concave up (f′ increasing). f″ changes sign ⇒ point of inflection.',
@@ -363,6 +382,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u5/MVT')),
         talk: {
           big: 'Somewhere along the way, your instantaneous rate equals your average rate.',
+          mustKnow: 'Check the hypotheses (continuous on [a, b], differentiable on (a, b)), compute the secant slope, then conclude that some c in (a, b) has f′(c) equal to it. AP often applies this to tables of data.',
           points: [
             'Drag a and b. The points c where the tangent is parallel to the secant light up.',
             'Requirements: continuous on [a, b] and differentiable on (a, b). Try |x| to see it fail.',
@@ -380,6 +400,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u5/Extrema')),
         talk: {
           big: 'On a closed interval, absolute extrema occur at critical points or at endpoints. Check every candidate.',
+          mustKnow: 'For absolute extrema on a closed interval, list the endpoints and the critical points, then evaluate f at each one. The maximum is the largest f-value, and it occurs at some x. Report whichever one the question asks for.',
           points: [
             'Extreme Value Theorem: continuous on [a, b] ⇒ there is an absolute max and an absolute min.',
             'Candidates: endpoints, plus the points where f′ = 0 or f′ is undefined.',
@@ -397,6 +418,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u5/Optimization')),
         talk: {
           big: 'Optimization: write the quantity as a function of one variable, then find where its derivative is 0.',
+          mustKnow: 'Use the constraint to write the target as a function of ONE variable, and find its domain. Set the derivative to 0, then justify that the critical point is the max or min with a sign chart, the second derivative, or the candidates test.',
           points: [
             'Small cuts make a flat box. Big cuts make a narrow tower. The best box is somewhere in between.',
             'The domain matters: 0 < x < W/2.',
@@ -420,6 +442,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u6/Riemann')),
         talk: {
           big: 'Slice the area into rectangles, add them up, and take the limit: that limit is the definite integral.',
+          mustKnow: 'Sum width × height. Know which height each method uses and when it over- or underestimates: left and right depend on whether f is increasing or decreasing, while trapezoid and midpoint depend on concavity. Uneven table intervals give each piece its own width.',
           points: [
             'Increasing f: the left sum underestimates and the right sum overestimates. Reversed for decreasing f.',
             'Trapezoids overestimate when f is concave up and underestimate when f is concave down.',
@@ -438,6 +461,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u6/Accumulation')),
         talk: {
           big: 'The rate at which area accumulates is the height of f, so F′(x) = f(x). This is the Fundamental Theorem.',
+          mustKnow: 'For F(x) = ∫ from a to x of f(t) dt, the function f IS F′. The sign of f gives the direction of F, and the slope of f gives the concavity of F. With a variable upper limit g(x), the derivative is f(g(x))·g′(x).',
           points: [
             'Where f > 0, F increases. Where f < 0, F decreases.',
             'Zeros of f where f changes sign are the extrema of F.',
@@ -456,6 +480,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u6/Antiderivatives')),
         talk: {
           big: 'An antiderivative is only known up to a vertical shift, because shifting doesn’t change slopes.',
+          mustKnow: 'Reverse the derivative rules (power rule: add 1 to the exponent and divide by it, except 1/x → ln|x|). Always write + C, then use the initial condition to solve for C.',
           points: [
             'Every curve in the family has the same tangent slope at any given x.',
             'Drag the initial condition point to choose the one curve you want.',
@@ -480,6 +505,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u7/SlopeField')),
         talk: {
           big: 'A differential equation gives a slope at every point. A solution is a curve that follows those slopes everywhere.',
+          mustKnow: 'The segment at each point has slope equal to dy/dx evaluated there. To sketch or match a field, compute slopes at a few points, then look for zero slopes and for slopes that stay constant along rows or columns.',
           points: [
             'If dy/dx depends only on x, the slopes are the same along each vertical column.',
             'If dy/dx depends only on y, the slopes are the same along each horizontal row (autonomous).',
@@ -497,6 +523,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u7/Exponential')),
         talk: {
           big: 'When the rate is proportional to the amount, the solution is exponential.',
+          mustKnow: 'Recognize “rate proportional to amount” as dy/dt = ky, so y = y₀e^{kt}. The initial value gives y₀, and a second data point gives k.',
           points: [
             'dy/dt = ky ⇒ y = y₀e^{kt}. Separate the variables to derive it.',
             'k > 0 gives growth and k < 0 gives decay. Doubling time and half-life depend only on k.',
@@ -520,6 +547,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u8/AverageValue')),
         talk: {
           big: 'The average value is the height of the rectangle on [a, b] with the same area as the region under f.',
+          mustKnow: 'The average value of f is (1/(b − a))·∫ from a to b of f(x) dx. The average rate of change is [f(b) − f(a)]/(b − a). Read which one the question asks for.',
           points: [
             'The pieces above the line fill the gaps below it exactly.',
             'The MVT for integrals: f actually reaches its average value somewhere.',
@@ -537,6 +565,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u8/AreaBetween')),
         talk: {
           big: 'Area = ∫(top − bottom) dx, or ∫(right − left) dy. Pick the slicing direction that keeps the formula to one piece.',
+          mustKnow: 'Find the intersection points, decide which curve is top (or right) on each interval, and integrate top − bottom. Split the integral wherever the curves cross.',
           points: [
             'Find the intersection points first. They are your limits of integration.',
             'If top and bottom swap partway, split the integral.',
@@ -553,6 +582,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u8/CrossSections')),
         talk: {
           big: 'Volume = ∫ (area of one slice) dx. Each slice is a shape built on the base region’s width.',
+          mustKnow: 'The cross-section side s is the width of the base region at x (top − bottom). Turn s into an area A(x) with the shape formula, then integrate A(x) along the base.',
           points: [
             'Square of side s: A = s². Semicircle of diameter s: A = πs²/8.',
             'Equilateral triangle of side s: A = (√3/4)s². Isosceles right triangle with leg s: A = s²/2.',
@@ -570,6 +600,7 @@ export const units: Unit[] = [
         component: L(() => import('./units/u8/Volumes')),
         talk: {
           big: 'Spin one thin slice and you get a disc, or a washer if there is a hole. Add up the discs.',
+          mustKnow: 'Radii are distances from the axis of rotation: R to the outer edge, r to the inner edge. Square each radius separately, and integrate in the variable that runs along the axis.',
           points: [
             'Disc: V = π∫R² dx. Washer: V = π∫(R² − r²) dx.',
             'R and r are distances from the AXIS. When the axis isn’t y = 0, shift them (e.g. R = 3 − g(x) for y = 3).',
